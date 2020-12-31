@@ -1,0 +1,11 @@
+start,end,desc
+0001F,0015F,Composite measures
+0500F,0584F,Patient management
+1000F,1505F,Patient history
+2000F,2060F,Physical examination
+3006F,3776F,Diagnostic or screening processes or results
+4000F,4563F,Therapeutic or preventive or other interventions
+5005F,5250F,Follow-up or other outcomes
+6005F,6150F,Patient safety
+7010F,7025F,Structural measures
+9001F,9007F,Non-measure claims-based reporting

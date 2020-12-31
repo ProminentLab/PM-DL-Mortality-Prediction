@@ -1,0 +1,10 @@
+start,end,desc
+99201,99499,evaluation and management
+00100,01999,anesthesia
+99100,99150,anesthesia
+10000,69990,surgery
+70000,79999,radiology
+80000,89398,pathology and laboratory
+90281,99099,medicine
+99151,99199,medicine
+99500,99607,medicine

@@ -1,0 +1,116 @@
+start,end,desc
+99201,99215,Office or other outpatient services
+99217,99220,Hospital observation services
+99221,99239,Hospital inpatient services
+99241,99255,Consultations
+99281,99288,Emergency department services
+99291,99292,Critical care services
+99304,99318,Nursing facility services
+99324,99337,Domiciliary rest home (boarding home) or custodial care services
+99339,99340,Domiciliary rest home (assisted living facility) or home care plan oversight services
+99341,99350,Home health services
+99354,99360,Prolonged services
+99363,99368,Case management services
+99374,99380,Care plan oversight services
+99381,99429,Preventive medicine services
+99441,99444,Non-face-to-face physician services
+99450,99456,Special evaluation and management services
+99460,99465,Newborn care services
+99466,99480,Inpatient neonatal intensive and pediatric/neonatal critical care services
+99487,99489,Complex chronic care coordination services
+99495,99496,Transitional care management services
+99499,99499,Other evaluation and management services
+00100,00222,head
+00300,00352,neck
+00400,00474,thorax
+00500,00580,intrathoracic
+00600,00670,spine and spinal cord
+00700,00797,upper abdomen[8]
+00800,00882,lower abdomen[9]
+00902,00952,perineum
+01112,01190,pelvis (except hip)
+01200,01274,upper leg (except knee)
+01320,01444,knee and popliteal area
+01462,01522,lower leg (below knee)
+01610,01682,shoulder and axillary
+01710,01782,upper arm and elbow
+01810,01860,forearm and wrist and hand
+01916,01936,radiological procedures
+01951,01953,burn excisions or debridement
+01958,01969,obstetric
+01990,01999,other procedures
+99100,99140,qualifying circumstances for anesthesia
+99143,99150,moderate (conscious) sedation
+10000,10022,general
+10040,19499,integumentary system
+20000,29999,musculoskeletal system
+30000,32999,respiratory system
+33010,37799,cardiovascular system
+38100,38999,hemic and lymphatic systems
+39000,39599,mediastinum and diaphragm
+40490,49999,digestive system
+50010,53899,urinary system
+54000,55899,male genital system
+55920,55980,reproductive system and intersex
+56405,58999,female genital system
+59000,59899,maternity care and delivery
+60000,60699,endocrine system
+61000,64999,nervous system
+65091,68899,eye and ocular adnexa
+69000,69979,auditory system
+70010,76499,diagnostic radiology
+76500,76999,diagnostic ultrasound
+77001,77032,radiologic guidance
+77051,77059,breast mammography
+77071,77084,bone/joint studies
+77261,77999,radiation oncology
+78000,79999,nuclear medicine
+80000,80076,organ or disease-oriented panels
+80100,80103,drug testing
+80150,80299,therapeutic drug assays
+80400,80440,evocative/suppression testing
+80500,80502,consultations (clinical pathology)
+81000,81099,urinalysis
+82000,84999,chemistry
+85002,85999,hematology and coagulation
+86000,86849,immunology
+86850,86999,transfusion medicine
+87001,87999,microbiology
+88000,88099,anatomic pathology (postmortem)
+88104,88199,cytopathology
+88230,88299,cytogenetic studies
+88300,88399,surgical pathology
+88720,88741,in vivo (transcutaneous) lab procedures
+89049,89240,other procedures
+89250,89398,reproductive medicine procedures
+90281,90399,immune globulins and serum or recombinant prods
+90465,90474,immunization administration for vaccines or toxoids
+90476,90749,vaccines and-or toxoids
+90801,90899,psychiatry
+90901,90911,biofeedback
+90935,90999,dialysis
+91000,91299,gastroenterology
+92002,92499,ophthalmology
+92502,92700,special otorhinolaryngologic services
+92950,93799,cardiovascular
+93875,93990,noninvasive vascular diagnostic studies
+94002,94799,pulmonary
+95004,95199,allergy and clinical immunology
+95250,95251,endocrinology
+95803,96020,neurology and neuromuscular procedures
+96101,96125,central nervous system assessments/tests (neuro-cognitive and mental status and speech testing)
+96150,96155,health and behavior assessment/intervention
+96360,96549,hydration and therapeutic and prophylactic diagnostic injections and infusions and chemotherapy and other highly complex drug or highly complex biologic agent administration
+96567,96571,photodynamic therapy
+96900,96999,special dermatological procedures
+97001,97799,physical medicine and rehabilitation
+97802,97804,medical nutrition therapy
+97810,97814,acupuncture
+98925,98929,osteopathic manipulative treatment
+98940,98943,chiropractic manipulative treatment
+98960,98962,education and training for patient self-management
+98966,98969,non-face-to-face nonphysician services
+99000,99091,special services and procedures and reports
+99170,99199,other services and procedures
+99500,99602,home health procedures/services
+99605,99607,medication therapy management services
