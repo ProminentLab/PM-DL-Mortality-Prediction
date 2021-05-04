@@ -30,8 +30,8 @@ if __name__== "__main__":
 
 
 
-    net, initial_marking, final_marking = pnml_importer.import_net("data/models/im_log_train.pnml")
-    enhanced_pn = EnhancedPN(net, initial_marking, decay_function_file="data/models/im_log_train_multienhanced.json")
+    net, initial_marking, final_marking = pnml_importer.import_net("data/models/sm_log_train.pnml")
+    enhanced_pn = EnhancedPN(net, initial_marking, decay_function_file="data/models/sm_log_train_multienhanced.json")
 
     print("PN Places:", len(net.places))
     print("PN Transitions:", len(net.transitions))
@@ -41,14 +41,14 @@ if __name__== "__main__":
 
     enhanced_pn.prepareEventCounter()
     timedstatesamples, tss_objects = enhanced_pn.decay_replay(log_wrapper=log_wrapper_train, meta=meta, oversample=None, train=False, count_events=count_events)
-    with open("data/output/im_log_train_tss_train.json", 'w') as fp:
+    with open("data/output/sm_log_train_tss_train.json", 'w') as fp:
         json.dump(timedstatesamples, fp)
 
     timedstatesamples, tss_objects = enhanced_pn.decay_replay(log_wrapper=log_wrapper_test, meta=meta, oversample=None, train=False, count_events=count_events)
-    with open("data/output/im_log_train_tss_test.json", 'w') as fp:
+    with open("data/output/sm_log_train_tss_test.json", 'w') as fp:
         json.dump(timedstatesamples, fp)
 
     timedstatesamples, tss_objects = enhanced_pn.decay_replay(log_wrapper=log_wrapper_val, meta=meta, oversample=None,
                                                                   train=False, count_events=count_events)
-    with open("data/output/im_log_train_tss_val.json", 'w') as fp:
+    with open("data/output/sm_log_train_tss_val.json", 'w') as fp:
         json.dump(timedstatesamples, fp)

@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix, roc_auc_score
 
 if __name__== "__main__":
     model_path = "data/models/final_models"
-    model_name = "log_train_scoreonly"
+    model_name = "best_noscore"
 
     split = SPLIT(net=None,
                   tss_train_file="data/output/sm_log_train_tss_train.json",

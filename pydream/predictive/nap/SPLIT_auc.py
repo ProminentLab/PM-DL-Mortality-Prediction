@@ -64,15 +64,19 @@ class SPLIT:
         """ Options """
 
         self.opts = {"seed" : 664646,
-                     "n_epochs" : 300,
-                     "n_batch_size" : 512,
-                     "dropout_rate" : 0.7,
+                     "n_epochs" : 200,
+                     "n_batch_size" : 256,
+                     "dropout_rate" : 0.4,
                      "activation_function" : "relu"}
         self.setSeed()
 
         if options is not None:
             for key in options.keys():
                 self.opts[key] = options[key]
+
+        with open('data\\output\\meta.json') as json_file:
+            self.meta = json.load(json_file)
+
 
         """ Load data and setup """
         if tss_train_file is not None and tss_test_file is not None:
@@ -136,40 +140,26 @@ class SPLIT:
             inputB = Input(shape=(insize_meta,))
             inputC = Input(shape=(insize_eventcount,))
 
-            # the first branch operates on the first input
-            x = Dense(500, activation=self.opts["activation_function"])(inputA)
+            x = Dense(100, activation=self.opts["activation_function"])(inputA)
             x = BatchNormalization()(x)
-            x = Dropout(self.opts["dropout_rate"])(x)
-            x = Dense(250, activation=self.opts["activation_function"])(x)
-            x = Dropout(self.opts["dropout_rate"])(x)
-            x = Dense(75, activation=self.opts["activation_function"])(x)
             x = Dropout(self.opts["dropout_rate"])(x)
             x = Model(inputs=inputA, outputs=x)
 
-            # the second branch opreates on the second input
-            y = Dense(32, activation="relu")(inputB) #32
+            y = Dense(20, activation="relu")(inputB)
             y = BatchNormalization()(y)
             y = Dropout(self.opts["dropout_rate"])(y)
-            y = Dense(16, activation="relu")(y) #16
-            y = Dropout(self.opts["dropout_rate"])(y)
-            y = Dense(8, activation="relu")(y)
             y = Model(inputs=inputB, outputs=y)
 
-            # the second branch opreates on the second input
-            w = Dense(55, activation="relu")(inputC)
+            w = Dense(20, activation="relu")(inputC)
             w = BatchNormalization()(w)
             w = Dropout(self.opts["dropout_rate"])(w)
-            w = Dense(32, activation="relu")(w)
-            w = Dropout(self.opts["dropout_rate"])(w)
-            w = Dense(16, activation="relu")(w)
             w = Model(inputs=inputC, outputs=w)
 
-
-            # combine the output of the branches
-            combined = concatenate([x.output, y.output, w.output])
-
-            z = Dense(32, activation="relu")(combined)
-            z = Dense(16, activation="relu")(z)
+            z = concatenate([x.output, y.output, w.output])
+            z = Dense(100, activation="relu")(z)
+            z = Dropout(self.opts["dropout_rate"])(z)
+            z = Dense(50, activation="relu")(z)
+            z = Dropout(self.opts["dropout_rate"])(z)
             z = Dense(outsize, activation='softmax')(z)
 
             self.model = Model(inputs=[x.input, y.input, w.input], outputs=z)
@@ -188,9 +178,6 @@ class SPLIT:
         checkpoint = ModelCheckpoint(ckpt_file, monitor='val_auc', verbose=1, save_best_only=False, mode='auto', save_weights_only=False, period=1)
 
         sample_weight = class_weight.compute_sample_weight('balanced', self.Y_train)
-
-
-        le = LabelEncoder()
 
         print("Class weights : ", class_weight)
 
@@ -248,7 +235,6 @@ class SPLIT:
             self.one_hot_dict[event] = list(self.onehot_encoder.transform([self.label_encoder.transform([event])])[0])
 
     def loadData(self, file, train, filter=None):
-
         x, x2, x3, y  = [], [], [], []
         patients = []
 
@@ -298,12 +284,15 @@ class SPLIT:
 
                     if filter is None or filter == True:
                         x.append(list(itertools.chain(decays, mark, tcount)))
-                        y.append(sample["nextEvent"])
                         patients.append(sample["patient"])
+
+                        y.append(str(self.meta[str(sample["patient"])]["in_hospital_death"][-1]))
+
+
                     else:
                         if sample["patient"] in filter:
                             x.append(list(itertools.chain(decays, mark, tcount)))
-                            y.append(sample["nextEvent"])
+                            y.append(str(self.meta[str(sample["patient"])]["in_hospital_death"][-1]))
         if train:
             self.train_patients = np.array(patients)
         else:
@@ -327,6 +316,18 @@ class SPLIT:
         for k, v in self.one_hot_dict.items():
             if str(v) == str(one_hot):
                 return k
+
+    def predict_test_index(self, path, name, index):
+        with open(path + "\\" + name + "_split_model.json", 'r') as f:
+            self.model = model_from_json(f.read())
+        self.model.load_weights(path + "\\" + name + "_split_weights-" + index + ".hdf5")
+        with open(path + "\\" + name + "_split_onehotdict.json", 'r') as f:
+            self.one_hot_dict = json.load(f)
+
+        y_prob = self.model.predict([self.X_test, self.X2_test, self.X3_test])
+        y_pred = np.argmax(y_prob, axis=1)
+
+        return y_pred, y_prob
 
     def predict_test(self, path, name):
         self.loadModel(path=path, name=name)
